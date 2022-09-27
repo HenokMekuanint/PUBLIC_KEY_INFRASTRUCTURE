@@ -48,4 +48,5 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                                           Touch index.txt serial
                                           Echo 00>serial
                                           Cd ..
+          ![Picture1](https://user-images.githubusercontent.com/90408697/192576223-c4fb5649-c231-47f2-95ce-3519e1f7154b.png)
                                           
