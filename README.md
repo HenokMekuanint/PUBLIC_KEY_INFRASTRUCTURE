@@ -58,6 +58,151 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                             Openssl req -new -x509 -keyout ca.keys -out ca.crt -config openssl.cnf
                             
                             
-                            ![Picture2](https://user-images.githubusercontent.com/90408697/192576254-23f5508b
+                            ![Picture2](https://user-images.githubusercontent.com/90408697/192580040-dfd3e247-2ee8-45ac-88ac-4347343f3ad5.png)
+                            
+                            
+                                                            Countru Name:ET
+                                                            State or province: AA
+                                                            Locality Name:AA
+                                                            Organization name:AAU
+                                                            Organization Unit name:SW
+                                                            Commom Name:HenokCA.com
+                                                            Email_Address:henokmekuanint79@gmail.com
+                                                            Password:******
+                                                            
+                              ![Picture3](https://user-images.githubusercontent.com/90408697/192578760-16867e23-2604-4600-821a-c33a722ed4fc.png)
+                              
+                              
+                              C.To view the certificate we will use the command
 
+                                    Opessl x509 -in ca.crt -text -noout
+                                    
+                                    
+                                    ![Picture4](https://user-images.githubusercontent.com/90408697/192576276-7ea3ac85-cb01-46b9-be95-022f1a0a019c.png)
+                                    
+                                    
+                                    ![Picture5](https://user-images.githubusercontent.com/90408697/192591431-b065b79f-196a-43be-98e3-39e0e26190e9.png)
+                                    
+                              2.2 Task 2: Creating a Certificate for SEEDPKILab2020.com
+
+                              Now, we become a root CA, we are ready to sign digital certificates for our customers. Our first customer is a company called SEEDPKILab2020.com. For this company to get a digital certificate from a CA, it needs to go through three steps. 
+                              
+                              Step 1: Generate public/private key pair
+                              
+                          The company needs to first create its own public/private key pair. We can run the following command to generate an RSA key pair (both private and public keys). You will also be required to provide a password to encrypt the private key (using the AES-128 encryption algorithm, as is specified in the command option). The keys will be stored in the file server.key:
+                          $ openssl genrsa -aes128 -out server.key 1024
+
+                          The server.key is an encoded text file (also encrypted), so you will not be able to see the actual content, such as the modulus, private exponents, etc. To see those, you can run the following command:
+                           $ openssl rsa -in server.key -text
+                           
+                            ![Picture6](https://user-images.githubusercontent.com/90408697/192577668-71676e82-c1b9-48b9-bd94-f015097c5d88.png)
+                            
+                                                2.View content of server.key 
+                                                
+                                              a.openssl rsa -in server.key –text
+                                              
+                        ![Picture7](https://user-images.githubusercontent.com/90408697/192576301-ae46bf96-5179-4980-a269-ae18d5a31f7d.png)
+                        
+                        ![Picture8](https://user-images.githubusercontent.com/90408697/192576396-ff010e8a-f7f6-4842-bec4-20a3b2ff956e.png)
+                        
+                        ![Picture9](https://user-images.githubusercontent.com/90408697/192576413-c7ba9eaa-d036-41f8-bd65-074c8263a786.png)
+
+
+                                          Step 2: Generate a Certificate Signing Request (CSR).
                                           
+                                          
+                 Once the company has the key file, it should generates a Certificate Signing Request (CSR), which basically includes the company’s public key. The CSR will be sent to the CA, who will generate a certificate for the key (usually after ensuring that identity information in the CSR matches with the server’s true identity). Please use SEEDPKILab2020.com as the common name of the certificate request
+
+                                    $ openssl req -new -key server.key -out server.csr -config openssl.cnf
+                                    
+                                    
+                                    ![Picture10](https://user-images.githubusercontent.com/90408697/192592604-d46ba0c9-b43b-41b9-a69b-6d1f6da0b830.png)
+
+
+                                  ![Picture11](https://user-images.githubusercontent.com/90408697/192576443-e834cf18-232f-46df-9cf6-7844ef09c79a.png)
+                                  
+                                  
+                                  Step 3: Generating Certificates.
+                                  
+                                  
+                                  The CSR file needs to have the CA’s signature to form a certificate. In the real world, the CSR files are usually sent to a trusted CA for their signature. In this lab, we will use our own trusted CA to generate certificates. The following command turns the certificate signing request (server.csr) into an X509 certificate (server.crt), using the CA’s ca.crt and ca.key:
+                                  
+                                   $ openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key \ -config openssl.cnf
+                                   
+                                  If OpenSSL refuses to generate certificates, it is very likely that the names in your requests do not match with those of CA. The matching rules are specified in the configuration file (look at the [policy match] section). You can change the names of your requests to comply with the policy, or you can change the policy. The configuration file also includes another policy (called policy anything), which is less restrictive.
+                                  
+                                  You can choose that policy by changing the following line:
+                                   "policy = policy_match" change to "policy = policy_anything".
+                                   
+                                  3.Generating Certificates 
+                                  
+                                  a.openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key -config openssl.cnf
+                                  
+                             ![Picture12](https://user-images.githubusercontent.com/90408697/192594637-54202e2a-f805-4b66-9f06-3ba1f8c164bd.png)
+                             ![Picture13](https://user-images.githubusercontent.com/90408697/192576479-cb7c84da-fae2-447f-be39-925821269766.png)
+                             
+                             4.Set the policy restriction to be less restrictive 
+                             
+                                a.In the policy section, set policy = policy_anything
+                                
+                                
+                                          ![Picture36](https://user-images.githubusercontent.com/90408697/192601624-bbf0bb44-bf11-4850-959e-e7bf798b6fa9.png)
+
+                                
+                                          2.3 Task 3: Deploying Certificate in an HTTPS Web Server
+
+                                           In this lab, we will explore how public-key certificates are used by websites to secure web browsing. We will set up an HTTPS website using openssl’s built-in web server.
+
+                                          Step 1: Configuring DNS. We choose SEEDPKILab2020.com as the name of our website. To get our computers recognize this name, let us add the following entry to /etc/hosts; this entry basically maps the hostname SEEDPKILab2020.com to our localhost.
+
+                                      ![Picture14](https://user-images.githubusercontent.com/90408697/192576540-3f698ef6-09da-4fb5-8b67-53bb2a1ed763.png)
+
+                                          Step 2: Configuring the web server. Let us launch a simple web server with the certificate generated in the previous task. OpenSSL allows us to start a simple web server using the s server command:
+                                          
+                                          ![Picture15](https://user-images.githubusercontent.com/90408697/192576577-3b4fd984-d7c2-431a-8004-223e4cd790b9.png)
+                                          
+                                           Step 3: The third step is importing  our certeficate in the firefox browser
+                                                    
+                                                    1.Open firefox
+                                                    2.Go to edit tab
+                                                    3.Preference
+                                                    4.Privacy and Security
+                                                    5.View Certificate
+                                                    6.Import Certeficate
+                                                    7.Load ca.crt
+
+                                  ![Picture16](https://user-images.githubusercontent.com/90408697/192576600-71ee0c8a-611e-4fc5-8afc-662f389c8c4e.png)
+                         Step 4:
+                         
+                         ![Picture17](https://user-images.githubusercontent.com/90408697/192576631-6ab6773e-64db-4b64-9948-63fdc7067c9a.png)
+
+                          ![Picture18](https://user-images.githubusercontent.com/90408697/192578055-794275c5-03ee-4a9a-819b-546a7536046d.png)
+                          
+                            A.There will not be any change after changing the server. The information that was displayed previously didn’t change.
+                            
+                            B.Since there is a common name in the certeficate accessing https://localhost:4433 result certeficate invalidation.
+                            
+                            2.4 Task 4: Deploying Certificate in an Apache-Based HTTPS Website
+                            
+                             The HTTPS server setup using openssl’s s server command is primarily for debugging and demonstration purposes. In this lab, we set up a real HTTPS web server based on Apache. The Apache server, which is already installed in our VM, supports the HTTPS protocol. To create an HTTPS website, we just need to configure the Apache server, so it knows where to get the private key and certificates. We give an example in the following to show how to enable HTTPS for a website www.example.com. You task is to do the same for SEEDPKILab2020.com using the certificate generated from previous tasks. An Apache server can simultaneously host multiple websites. It needs to know the directory where a website’s files are stored. 
+
+                            Step 1:  The forst Step is setting up the  HTTP website
+                            
+                            ![Picture19](https://user-images.githubusercontent.com/90408697/192603141-2f416e79-ddfa-4ada-b7de-16e33562151d.png)
+
+                            ![Picture20](https://user-images.githubusercontent.com/90408697/192578105-4339e3db-fcfb-4259-825a-b76b56d5910c.png)
+                            
+                            Step2. SEED PKI Lab 2021.com  to the Virtual Host Entry.
+                            
+                            ![Picture21](https://user-images.githubusercontent.com/90408697/192578129-fcb22d19-444a-4920-b26a-d9855e75bb10.png)
+
+                            Step3: Adding VirtualHost to default-ssl
+                            
+                            ![Picture22](https://user-images.githubusercontent.com/90408697/192604121-cc6685a8-a29e-4db3-886d-2c11dfc360a1.png)
+                            
+                            Step4: SSL module is enabled and apache is restarted
+                            
+                            ![Picture23](https://user-images.githubusercontent.com/90408697/192578177-d07b73d2-4c90-4437-86f8-5b7fb6341b91.png)
+                            
+                            ![Picture24](https://user-images.githubusercontent.com/90408697/192578189-b27523e0-7b27-48c6-9617-ec92ff4c9df1.png)
+
