@@ -49,4 +49,15 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                                           Echo 00>serial
                                           Cd ..
           ![Picture1](https://user-images.githubusercontent.com/90408697/192576223-c4fb5649-c231-47f2-95ce-3519e1f7154b.png)
+          
+          
+          Generate a single certeficate
+
+                            To generate a certeficate there are some information must be filled. Those information are filled in the above command.
+                            To request a new certeficate we will use the command
+                            Openssl req -new -x509 -keyout ca.keys -out ca.crt -config openssl.cnf
+                            
+                            
+                            ![Picture2](https://user-images.githubusercontent.com/90408697/192576254-23f5508b
+
                                           
