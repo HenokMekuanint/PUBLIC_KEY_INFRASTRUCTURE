@@ -51,14 +51,14 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
           ![Picture1](https://user-images.githubusercontent.com/90408697/192576223-c4fb5649-c231-47f2-95ce-3519e1f7154b.png)
           
           
-          Generate a single certeficate
+  Generate a single certeficate
 
-                            To generate a certeficate there are some information must be filled. Those information are filled in the above command.
-                            To request a new certeficate we will use the command
-                            Openssl req -new -x509 -keyout ca.keys -out ca.crt -config openssl.cnf
+  To generate a certeficate there are some information must be filled. Those information are filled in the above command.
+  To request a new certeficate we will use the command
+  Openssl req -new -x509 -keyout ca.keys -out ca.crt -config openssl.cnf
                             
                             
-                            ![Picture2](https://user-images.githubusercontent.com/90408697/192580040-dfd3e247-2ee8-45ac-88ac-4347343f3ad5.png)
+   ![Picture2](https://user-images.githubusercontent.com/90408697/192580040-dfd3e247-2ee8-45ac-88ac-4347343f3ad5.png)
                             
                             
                                                             Countru Name:ET
@@ -70,7 +70,7 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                                                             Email_Address:henokmekuanint79@gmail.com
                                                             Password:******
                                                             
-                              ![Picture3](https://user-images.githubusercontent.com/90408697/192578760-16867e23-2604-4600-821a-c33a722ed4fc.png)
+![Picture3](https://user-images.githubusercontent.com/90408697/192578760-16867e23-2604-4600-821a-c33a722ed4fc.png)
                               
                               
                               C.To view the certificate we will use the command
@@ -78,10 +78,10 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                                     Opessl x509 -in ca.crt -text -noout
                                     
                                     
-                                    ![Picture4](https://user-images.githubusercontent.com/90408697/192576276-7ea3ac85-cb01-46b9-be95-022f1a0a019c.png)
+  ![Picture4](https://user-images.githubusercontent.com/90408697/192576276-7ea3ac85-cb01-46b9-be95-022f1a0a019c.png)
                                     
                                     
-                                    ![Picture5](https://user-images.githubusercontent.com/90408697/192591431-b065b79f-196a-43be-98e3-39e0e26190e9.png)
+ ![Picture5](https://user-images.githubusercontent.com/90408697/192591431-b065b79f-196a-43be-98e3-39e0e26190e9.png)
                                     
                               2.2 Task 2: Creating a Certificate for SEEDPKILab2020.com
 
@@ -95,17 +95,17 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                           The server.key is an encoded text file (also encrypted), so you will not be able to see the actual content, such as the modulus, private exponents, etc. To see those, you can run the following command:
                            $ openssl rsa -in server.key -text
                            
-                            ![Picture6](https://user-images.githubusercontent.com/90408697/192577668-71676e82-c1b9-48b9-bd94-f015097c5d88.png)
+ ![Picture6](https://user-images.githubusercontent.com/90408697/192577668-71676e82-c1b9-48b9-bd94-f015097c5d88.png)
                             
                                                 2.View content of server.key 
                                                 
                                               a.openssl rsa -in server.key –text
                                               
-                        ![Picture7](https://user-images.githubusercontent.com/90408697/192576301-ae46bf96-5179-4980-a269-ae18d5a31f7d.png)
+ ![Picture7](https://user-images.githubusercontent.com/90408697/192576301-ae46bf96-5179-4980-a269-ae18d5a31f7d.png)
                         
-                        ![Picture8](https://user-images.githubusercontent.com/90408697/192576396-ff010e8a-f7f6-4842-bec4-20a3b2ff956e.png)
+ ![Picture8](https://user-images.githubusercontent.com/90408697/192576396-ff010e8a-f7f6-4842-bec4-20a3b2ff956e.png)
                         
-                        ![Picture9](https://user-images.githubusercontent.com/90408697/192576413-c7ba9eaa-d036-41f8-bd65-074c8263a786.png)
+![Picture9](https://user-images.githubusercontent.com/90408697/192576413-c7ba9eaa-d036-41f8-bd65-074c8263a786.png)
 
 
                                           Step 2: Generate a Certificate Signing Request (CSR).
@@ -115,11 +115,9 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
 
                                     $ openssl req -new -key server.key -out server.csr -config openssl.cnf
                                     
-                                    
-                                    ![Picture10](https://user-images.githubusercontent.com/90408697/192592604-d46ba0c9-b43b-41b9-a69b-6d1f6da0b830.png)
+ ![Picture10](https://user-images.githubusercontent.com/90408697/192592604-d46ba0c9-b43b-41b9-a69b-6d1f6da0b830.png)
 
-
-                                  ![Picture11](https://user-images.githubusercontent.com/90408697/192576443-e834cf18-232f-46df-9cf6-7844ef09c79a.png)
+![Picture11](https://user-images.githubusercontent.com/90408697/192576443-e834cf18-232f-46df-9cf6-7844ef09c79a.png)
                                   
                                   
                                   Step 3: Generating Certificates.
@@ -138,15 +136,15 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                                   
                                   a.openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key -config openssl.cnf
                                   
-                             ![Picture12](https://user-images.githubusercontent.com/90408697/192594637-54202e2a-f805-4b66-9f06-3ba1f8c164bd.png)
-                             ![Picture13](https://user-images.githubusercontent.com/90408697/192576479-cb7c84da-fae2-447f-be39-925821269766.png)
+![Picture12](https://user-images.githubusercontent.com/90408697/192594637-54202e2a-f805-4b66-9f06-3ba1f8c164bd.png)
+![Picture13](https://user-images.githubusercontent.com/90408697/192576479-cb7c84da-fae2-447f-be39-925821269766.png)
                              
                              4.Set the policy restriction to be less restrictive 
                              
                                 a.In the policy section, set policy = policy_anything
                                 
                                 
-                                          ![Picture36](https://user-images.githubusercontent.com/90408697/192601624-bbf0bb44-bf11-4850-959e-e7bf798b6fa9.png)
+![Picture36](https://user-images.githubusercontent.com/90408697/192601624-bbf0bb44-bf11-4850-959e-e7bf798b6fa9.png)
 
                                 
                                           2.3 Task 3: Deploying Certificate in an HTTPS Web Server
@@ -155,11 +153,11 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
 
                                           Step 1: Configuring DNS. We choose SEEDPKILab2020.com as the name of our website. To get our computers recognize this name, let us add the following entry to /etc/hosts; this entry basically maps the hostname SEEDPKILab2020.com to our localhost.
 
-                                      ![Picture14](https://user-images.githubusercontent.com/90408697/192576540-3f698ef6-09da-4fb5-8b67-53bb2a1ed763.png)
+![Picture14](https://user-images.githubusercontent.com/90408697/192576540-3f698ef6-09da-4fb5-8b67-53bb2a1ed763.png)
 
                                           Step 2: Configuring the web server. Let us launch a simple web server with the certificate generated in the previous task. OpenSSL allows us to start a simple web server using the s server command:
                                           
-                                          ![Picture15](https://user-images.githubusercontent.com/90408697/192576577-3b4fd984-d7c2-431a-8004-223e4cd790b9.png)
+   ![Picture15](https://user-images.githubusercontent.com/90408697/192576577-3b4fd984-d7c2-431a-8004-223e4cd790b9.png)
                                           
                                            Step 3: The third step is importing  our certeficate in the firefox browser
                                                     
@@ -171,12 +169,12 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
                                                     6.Import Certeficate
                                                     7.Load ca.crt
 
-                                  ![Picture16](https://user-images.githubusercontent.com/90408697/192576600-71ee0c8a-611e-4fc5-8afc-662f389c8c4e.png)
+  ![Picture16](https://user-images.githubusercontent.com/90408697/192576600-71ee0c8a-611e-4fc5-8afc-662f389c8c4e.png)
                          Step 4:
                          
-                         ![Picture17](https://user-images.githubusercontent.com/90408697/192576631-6ab6773e-64db-4b64-9948-63fdc7067c9a.png)
+ ![Picture17](https://user-images.githubusercontent.com/90408697/192576631-6ab6773e-64db-4b64-9948-63fdc7067c9a.png)
 
-                          ![Picture18](https://user-images.githubusercontent.com/90408697/192578055-794275c5-03ee-4a9a-819b-546a7536046d.png)
+ ![Picture18](https://user-images.githubusercontent.com/90408697/192578055-794275c5-03ee-4a9a-819b-546a7536046d.png)
                           
                             A.There will not be any change after changing the server. The information that was displayed previously didn’t change.
                             
@@ -188,21 +186,21 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
 
                             Step 1:  The forst Step is setting up the  HTTP website
                             
-                            ![Picture19](https://user-images.githubusercontent.com/90408697/192603141-2f416e79-ddfa-4ada-b7de-16e33562151d.png)
+ ![Picture19](https://user-images.githubusercontent.com/90408697/192603141-2f416e79-ddfa-4ada-b7de-16e33562151d.png)
 
-                            ![Picture20](https://user-images.githubusercontent.com/90408697/192578105-4339e3db-fcfb-4259-825a-b76b56d5910c.png)
+ ![Picture20](https://user-images.githubusercontent.com/90408697/192578105-4339e3db-fcfb-4259-825a-b76b56d5910c.png)
                             
                             Step2. SEED PKI Lab 2021.com  to the Virtual Host Entry.
                             
-                            ![Picture21](https://user-images.githubusercontent.com/90408697/192578129-fcb22d19-444a-4920-b26a-d9855e75bb10.png)
+ ![Picture21](https://user-images.githubusercontent.com/90408697/192578129-fcb22d19-444a-4920-b26a-d9855e75bb10.png)
 
                             Step3: Adding VirtualHost to default-ssl
                             
-                            ![Picture22](https://user-images.githubusercontent.com/90408697/192604121-cc6685a8-a29e-4db3-886d-2c11dfc360a1.png)
+ ![Picture22](https://user-images.githubusercontent.com/90408697/192604121-cc6685a8-a29e-4db3-886d-2c11dfc360a1.png)
                             
                             Step4: SSL module is enabled and apache is restarted
                             
-                            ![Picture23](https://user-images.githubusercontent.com/90408697/192578177-d07b73d2-4c90-4437-86f8-5b7fb6341b91.png)
+ ![Picture23](https://user-images.githubusercontent.com/90408697/192578177-d07b73d2-4c90-4437-86f8-5b7fb6341b91.png)
                             
-                            ![Picture24](https://user-images.githubusercontent.com/90408697/192578189-b27523e0-7b27-48c6-9617-ec92ff4c9df1.png)
+ ![Picture24](https://user-images.githubusercontent.com/90408697/192578189-b27523e0-7b27-48c6-9617-ec92ff4c9df1.png)
 
