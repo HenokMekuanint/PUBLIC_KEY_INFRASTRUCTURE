@@ -203,4 +203,57 @@ Name, Common Name, etc. The output of the command are stored in two files: ca.ke
  ![Picture23](https://user-images.githubusercontent.com/90408697/192578177-d07b73d2-4c90-4437-86f8-5b7fb6341b91.png)
                             
  ![Picture24](https://user-images.githubusercontent.com/90408697/192578189-b27523e0-7b27-48c6-9617-ec92ff4c9df1.png)
+ 
+                          Step5: Lanching SEEDPKILab2021.com
+                          
+ ![Picture25](https://user-images.githubusercontent.com/90408697/192578200-2e1feb75-2f23-416f-995f-ed0f7db7006a.png)
 
+
+                                                    2.5 Task 5: Launching a Man In The Middle
+
+                                                    Attack In this task, we will show how PKI can defeat Man-In-The-Middle (MITM) attacks. Figure 1 depicts how MITM attacks work. Assume Alice wants to visit example.com via the HTTPS protocol. She needs to get the public key from the example.com server; Alice will generate a secret, and encrypt the secret using the server’s public key, and send it to the server. If an attacker can intercept the communication between Alice and the server, the attacker can replace the server’s public key with its own public key. Therefore, Alice’s secret is actually encrypted with the attacker’s public key, so the attacker will be able to read the secret. The attacker can forward the secret to the server using the server’s public key. The secret is used to encrypt the communication between Alice and server, so the attacker can decrypt the encrypted communication.
+                                                    
+                                                    
+                                                    Step 1: Setting up the malicious website. 
+                                                    
+                                                    
+                                                    In Task 4, we have already set up an HTTPS website for SEEDPKILab2020.com. We will use the same Apache server to impersonate example.com (or the site chosen by students). To achieve that, we will follow the instruction in Task 4 to add a VirtualHost entry to Apache’s SSL configuration file: the ServerName should be example.com, but the rest of the configuration can be the same as that used in Task 4. Our goal is the following: when a user tries to visit example.com, we are going to get the user to land in our server, which hosts a fake website for example.com. If this were a social network website, The fake site can display a login page similar to the one in the target website. If users cannot tell the difference, they may type their account credentials in the fake webpage, essentially disclosing the credentials to the attacker.
+Step 2: Becoming the man in the middle There are several ways to get the user’s HTTPS request to land in our web server. One way is to attack the routing, so the user’s HTTPS request is routed to our web server. Another way is to attack DNS, so when the victim’s machine tries to find out the IP address of the target web server, it gets the IP address of our web server. In this task, we use “attack” DNS. Instead of launching an actual DNS cache poisoning attack, we simply modify the victim’s machine’s /etc/hosts file to emulate the result of a DNS cache positing attack (the IP Address in the following should be replaced by the actual IP address of the malicious server).
+
+                                            Step1:SEED PKI Lab 2021.com  to the Virtual Host Entry.
+                                            
+                                            
+ ![Picture26](https://user-images.githubusercontent.com/90408697/192578244-55d2a82b-e654-4ea5-be31-e0a7f151d5f3.png)
+ 
+                                               Step2: Restarting the apahce 2
+                                               
+  ![Picture27](https://user-images.githubusercontent.com/90408697/192578260-3c3e68ef-74b3-46d8-ac02-9bd413f7000b.png)
+
+
+                                                    Step 3: Browse the target website. With everything set up, now visit the target real website, and see what your browser would say. Please explain what you have observed.
+
+![Picture28](https://user-images.githubusercontent.com/90408697/192578301-d943f97c-17dc-4d4d-950c-f2834df52a89.png)
+
+
+                                        2.6 Task 6: Launching a Man In The Middle Attack with a Compromised CA
+
+The first thing to launch a man in the Middle attack with a Compromised CA is to have a URI that redirects to other page. We have seen that we can create any Certificate with any domain page. So we will try to Create a Certeficaete using youtube.com
+
+![Picture29](https://user-images.githubusercontent.com/90408697/192578318-3d299d7c-1af3-4823-a586-09acb0efa7b6.png)
+
+                                Step1:Generating a certeficate using the same Doman name with youtube.com
+                                
+![Picture30](https://user-images.githubusercontent.com/90408697/192578325-a5d7229d-e681-4366-9096-7d84c00de281.png)
+![Picture31](https://user-images.githubusercontent.com/90408697/192578342-c953ab42-4309-4b75-a52d-fd45c53a54b3.png)
+
+                                Step2: Configuring the Server and adding the IP address and the domain name of the desired arttack
+                                
+![Picture32](https://user-images.githubusercontent.com/90408697/192578356-2a802cf2-4ee1-4d51-8433-05910b60e515.png)
+![Picture33](https://user-images.githubusercontent.com/90408697/192578409-55f97e17-8435-4191-8a82-ca601b9ac764.png)
+
+                                 Step3: Adding VirtualHost with domain name youtube.com and Document Root /var/www/seed
+                                 
+![Picture34](https://user-images.githubusercontent.com/90408697/192578425-f25103e3-54a8-4dd6-8f81-26e443e1db5f.png)
+
+                                  Step4: Browsing to https://www.youtube.com
+![Picture35](https://user-images.githubusercontent.com/90408697/192578446-84ede54d-7efd-4d5c-8294-7adaf8a65b25.png)
